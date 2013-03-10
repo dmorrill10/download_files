@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'optparse'
+require 'methadone'
+require_relative '../lib/download_files.rb'
+
+class App
+  include Methadone::Main
+  include Methadone::CLILogging
+
+  main do |page_address, pattern, directory|
+    dir = if directory
+      FileUtils.mkdir_p(directory) unless File.directory?(directory)
+    else
+      FileUtils.pwd
+    end
+    DownloadFiles.download_files(page_address, pattern, dir, logger)
+  end
+
+  # Declare command-line interface
+  description "Downloads files from the web page at the given address on the given domain that match the given regular expression pattern."
+  
+  # Require an argument
+  arg :page_address
+  arg :pattern
+  arg :directory, :optional
+  
+  version DownloadFiles::VERSION
+
+  use_log_level_option
+
+  go!
+end
