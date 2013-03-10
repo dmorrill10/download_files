@@ -4,8 +4,8 @@ require File.expand_path('../lib/download_files/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Dustin Morrill"]
   gem.email         = ["dmorrill10@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Download all files at a particular URL that match a certain pattern.}
+  gem.summary       = %q{Download all files at a particular URL that match a certain pattern.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
