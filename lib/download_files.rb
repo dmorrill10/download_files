@@ -31,8 +31,8 @@ module DownloadFiles
 
       page.links.each do |link|
         logger.debug "Checking link #{link.href}"
-        
-        next unless link.href.match(pattern)
+
+        next unless link.href && link.href.match(pattern)
 
         full_file_name = File.expand_path(File.basename(link.href), abs_dir)
         logger.info "Downloading #{link.click.uri} to #{full_file_name}"
