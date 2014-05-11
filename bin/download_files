@@ -25,7 +25,6 @@ class App
 
   arg :page_address
   arg :pattern
-  arg :directory, :optional
 
   options['directory'] = FileUtils.pwd
   on('-d DIRECTORY', '--directory', 'Directory for scrapped content')
