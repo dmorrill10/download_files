@@ -9,23 +9,33 @@ class App
   include Methadone::Main
   include Methadone::CLILogging
 
-  main do |page_address, pattern, directory|
-    dir = if directory
-      FileUtils.mkdir_p(directory) unless File.directory?(directory)
-    else
-      FileUtils.pwd
-    end
-    DownloadFiles.download_files(page_address, pattern, dir, logger)
+  main do |page_address, pattern|
+    FileUtils.mkdir_p(options['directory']) unless File.directory?(options['directory'])
+    DownloadFiles.download_files(
+      page_address,
+      pattern,
+      options['directory'],
+      options['ssl-verify'],
+      options['verbose'],
+      logger
+    )
   end
 
-  # Declare command-line interface
   description "Downloads files from the web page at the given address on the given domain that match the given regular expression pattern."
-  
-  # Require an argument
+
   arg :page_address
   arg :pattern
   arg :directory, :optional
-  
+
+  options['directory'] = FileUtils.pwd
+  on('-d DIRECTORY', '--directory', 'Directory for scrapped content')
+
+  options['ssl-verify'] = true
+  on "--[no]-ssl-verify", 'Do no SSL verification of target website.'
+
+  options['verbose'] = false
+  on '-v', "--verbose", 'Verbose output'
+
   version DownloadFiles::VERSION
 
   use_log_level_option

@@ -16,8 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = DownloadFiles::VERSION
 
   gem.add_development_dependency('rake', '~> 0.9.2')
-  
-  gem.add_dependency('methadone', '~> 1.2.5')
-  gem.add_dependency('mechanize')
-  gem.add_dependency('nullobject')
+
+  gem.add_dependency('methadone', '~> 1.4.0')
+  gem.add_dependency('mechanize', '~> 2.7.3')
 end
